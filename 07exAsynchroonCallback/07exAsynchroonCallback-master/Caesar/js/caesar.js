@@ -1,0 +1,1 @@
+const alfabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
