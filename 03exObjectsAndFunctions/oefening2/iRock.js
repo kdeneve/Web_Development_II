@@ -14,8 +14,15 @@ export const greetUser = function () {
 export const touchRock = function () {
   if (myPetRock.username == "") {
     myPetRock.username = prompt("What is your name?");
-    //console.log(`I like the attention, ${myPetRock.username}. Thank you.`);
-    alert (`I like the attention, ${myPetRock.username}. Thank you.`);
-    //alert(myPetRock.username);
   }
+  alert (`I like the attention, ${myPetRock.username}. Thank you.`);
+  myPetRock.image = "images/rock_happy.png"
+  showRock();
+  myPetRock.resetImage();
+  setTimeout(showRock, 2 * 1000);
+};
+
+
+const showRock = function() {
+  document.getElementById("rockImg").src = myPetRock.image;
 };
