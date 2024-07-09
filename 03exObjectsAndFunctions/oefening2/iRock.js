@@ -11,7 +11,7 @@ export const greetUser = function () {
   touchRock();
 };
 
-export const touchRock = function () {
+const touchRock = function () {
   if (myPetRock.username == "") {
     myPetRock.username = prompt("What is your name?");
   }

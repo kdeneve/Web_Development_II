@@ -1,4 +1,4 @@
-import { greetUser, touchRock } from "./iRock.js";
+import { greetUser } from "./iRock.js";
 
 const init = function () {
   //greetUser();
