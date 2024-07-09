@@ -26,3 +26,28 @@ const letterwaarden = {
   y: 8,
   z: 4,
 };
+
+
+export const initialiseerScrabble = function() {
+    //alert("Hallllloooooo");
+    const btn = document.getElementById('berekenPunten');
+    const woord = document.getElementById('woord');
+    
+    
+    btn.onclick = () => {
+      
+      alert(`Het woord ${woord.value} bestaat uit ${berekenPunten(woord.value)} punten`);
+    }
+
+};
+
+const berekenPunten = function(woord) {
+
+  let punten = 0;
+  woord = woord.toLowerCase();
+  for ( const letter of woord) {
+    punten += letterwaarden[letter];
+  }
+  return punten;
+}
+
