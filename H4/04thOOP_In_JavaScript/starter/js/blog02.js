@@ -41,6 +41,22 @@ class BlogEntry {
 //   in een blog retourneert.
 // ===================================================================
 
+class Blog {
+  #entries = [];
+  #creator;
+  constructor(creator) {
+    this.#creator = creator;
+  }
+    set #creator() { this.#creator= value|| 'Anonymous';}
+
+  get creator() { return this.#creator;}
+
+  get nrOfEntries () { return this.#entries.length;}
+  }
+
+  
+
+
 // Test je code:
 const myBlog = new Blog();
 const bashirsBlog = new Blog('Abdi Bashir');
