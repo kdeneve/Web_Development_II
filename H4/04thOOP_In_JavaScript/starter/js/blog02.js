@@ -11,7 +11,7 @@ class BlogEntry {
   }
 
   set #body(value) {
-    this.#entryBody = value || 'This entry is work in progress';
+    this.#entryBody = value || "This entry is work in progress";
   }
 
   get date() {
@@ -24,10 +24,10 @@ class BlogEntry {
 }
 
 // Voorbeelden gebruik BlogEntry
-// let aBlogEntry = new BlogEntry();
-// console.log(aBlogEntry.body);
-// aBlogEntry = new BlogEntry('Still dancing!');
-// console.log(aBlogEntry.body);
+let aBlogEntry = new BlogEntry();
+console.log(aBlogEntry.body);
+aBlogEntry = new BlogEntry("Still dancing!");
+console.log(aBlogEntry.body);
 
 // ===================================================================
 // Kopieer hieronder de klasse Blog uit blog01.js en pas de klasse aan.
@@ -45,17 +45,14 @@ class Blog {
   #entries = [];
   #creator;
   constructor(creator) {
-    this.#creator = creator;
+    this.creator = creator;
   }
-    set #creator() { this.#creator= value|| 'Anonymous';}
+  set creator(name) { this.#creator = name || 'Anonymous';}
 
   get creator() { return this.#creator;}
 
   get nrOfEntries () { return this.#entries.length;}
   }
-
-  
-
 
 // Test je code:
 const myBlog = new Blog();
