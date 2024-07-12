@@ -12,7 +12,7 @@ class BlogEntry {
   }
 
   set #body(value) {
-    this.#entryBody = value || 'This entry is work in progress';
+    this.#entryBody = value || "This entry is work in progress";
   }
 
   get date() {
@@ -35,8 +35,8 @@ class BlogEntry {
 
   get shortBody() {
     return (
-      this.body.split(' ').slice(0, BlogEntry.wordsInShortBody).join(' ') +
-      '...'
+      this.body.split(" ").slice(0, BlogEntry.wordsInShortBody).join(" ") +
+      "..."
     );
   }
 
@@ -47,7 +47,7 @@ class BlogEntry {
   }
 
   static createDummy() {
-    return new this('Nothing much to say today...');
+    return new this("Nothing much to say today...");
   }
 }
 
@@ -71,21 +71,63 @@ class BlogEntry {
 //   aan vrije plaats voor entries in de blog.
 // ========================================================================
 
+class Blog {
+  static maxEntries = 3;
+  #entries = [];
+  #creator;
+  constructor(creator) {
+    this.creator = creator;
+  }
+  set creator(name) {
+    this.#creator = name || "Anonymous";
+  }
+
+  get creator() {
+    return this.#creator;
+  }
+
+  get nrOfEntries() {
+    return this.#entries.length;
+  }
+
+  get freeSpace() {
+    return Math.round(
+      ((Blog.maxEntries - this.#entries.length) / Blog.maxEntries) * 100)
+  }
+
+
+  contains(searchText) {
+    for (const entry of this.#entries) {
+      if (entry.contains(searchText)) return true;
+    }
+    return false;
+  }
+
+  addEntry(body) {
+    this.#entries.unshift(new BlogEntry(body));
+    if (this.#entries.length > 3) this.#entries.pop();
+  }
+
+  getEntry(index) {
+    return this.#entries[index];
+  }
+}
+
 // Test je code:
 console.log(`A blog cannot have more than ${Blog.maxEntries} entries!`); // A blog cannot have more than 3 entries!
-const blog = new Blog('Nafi Thiam');
+const blog = new Blog("Nafi Thiam");
 console.log(`Free space in my blog = ${blog.freeSpace}%`); // Free space in my blog = 100%
-blog.addEntry('So excited I received the World Athlete of the Year award!');
+blog.addEntry("So excited I received the World Athlete of the Year award!");
 console.log(blog.getEntry(0)?.body); // So excited I received the World Athlete of the Year award!
 console.log(`Free space in my blog = ${blog.freeSpace}%`); // Free space in my blog = 67%
-blog.addEntry('This is the story of my back-to-back Olympic gold medal.');
+blog.addEntry("This is the story of my back-to-back Olympic gold medal.");
 blog.addEntry(
-  'How I trained to become the first Belgian World Athletics Championships gold medalist.'
+  "How I trained to become the first Belgian World Athletics Championships gold medalist."
 );
 console.log(blog.nrOfEntries); // 3
 console.log(`Free space in my blog = ${blog.freeSpace}%`); // Free space in my blog = 0%
-console.log(blog.contains('year')); // true
+console.log(blog.contains("year")); // true
 blog.addEntry(`Shame that a blog can only hold ${Blog.maxEntries} entries :-(`);
 console.log(blog.nrOfEntries); // 3
-console.log(blog.contains('year')); // false
+console.log(blog.contains("year")); // false
 console.log(blog.getEntry(0)?.body); // Shame that a blog can only hold 3 entries :-(
