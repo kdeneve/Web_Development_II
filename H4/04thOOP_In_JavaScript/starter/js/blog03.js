@@ -52,6 +52,39 @@ class BlogEntry {
 //   index geen entry aanwezig is.
 // ========================================================================
 
+class Blog {
+  #entries = [];
+  #creator;
+  constructor(creator) {
+    this.creator = creator;
+  }
+  set creator(name) { this.#creator = name || 'Anonymous';}
+
+  get creator() { return this.#creator;}
+
+  get nrOfEntries () { return this.#entries.length;}
+  
+  contains(searchText) {
+    for (const entry of this.#entries) {
+      if (entry.contains(searchText))
+        return true;
+    }
+    return false;
+
+  
+  }
+
+  addEntry(body) {
+    this.#entries.unshift(new BlogEntry(body));
+  }
+
+  getEntry(index) {
+    return this.#entries[index];
+  }
+
+  }
+
+
 // Test je code:
 const blog = new Blog('Nafi Thiam');
 blog.addEntry('So excited I received the World Athlete of the Year award!');
