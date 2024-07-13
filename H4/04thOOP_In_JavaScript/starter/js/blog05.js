@@ -213,6 +213,19 @@ class Blog {
 //   ! Indien de author niet voorkomt in de lijst van authors wordt geen entry toegevoegd !
 // ========================================================================
 
+class GroupBlog extends Blog {
+
+  #authors = [];
+
+  constructor (creator, ...authors) {
+    super(creator);
+    this.#authors = authors;
+
+  set addAuthor(author) {
+
+  }
+}
+
 // Test je code:
 const ourGroupBlog = new GroupBlog(
   'Nafi Thiam',
