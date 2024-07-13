@@ -18,7 +18,7 @@ class BlogEntry {
   }
 
   set #body(value) {
-    this.#entryBody = value || 'This entry is work in progress';
+    this.#entryBody = value || "This entry is work in progress";
   }
 
   get author() {
@@ -45,8 +45,8 @@ class BlogEntry {
 
   get shortBody() {
     return (
-      this.body.split(' ').slice(0, BlogEntry.wordsInShortBody).join(' ') +
-      '...'
+      this.body.split(" ").slice(0, BlogEntry.wordsInShortBody).join(" ") +
+      "..."
     );
   }
 
@@ -57,7 +57,7 @@ class BlogEntry {
   }
 
   static createDummy() {
-    return new this('Nothing much to say today...');
+    return new this("Nothing much to say today...");
   }
 
   toString() {
@@ -68,12 +68,12 @@ class BlogEntry {
 
   #toBlogFormat(date) {
     const options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     };
-    return date.toLocaleDateString('en-NL', options);
+    return date.toLocaleDateString("en-NL", options);
   }
 }
 
@@ -105,32 +105,33 @@ class TaggedBlogEntry extends BlogEntry {
   }
 
   toString() {
-    return `${super.toString()}\nTags: ${this.tags.join(', ')}`;
+    return `${super.toString()}\nTags: ${this.tags.join(", ")}`;
   }
 }
 
 // Voorbeelden gebruik TaggedBlogEntry
-// const myTaggedEntry = new TaggedBlogEntry(
-//   'A day in the life of a UNICEF Goodwill Ambassador',
-//   'Nafi Thiam',
-//   'United Nations', 'UNICEF'
-// );
-// console.log(myTaggedEntry.body); // A day in the life of a UNICEF Goodwill Ambassador
-// myTaggedEntry.addTag('children');
-// console.log(myTaggedEntry.tags); // [ "United Nations", "UNICEF", "children" ]
-// console.log(myTaggedEntry.contains('life')); // true
-// console.log(myTaggedEntry.contains('children')); // true
-// myTaggedEntry.removeTag('United Nations');
-// console.log(myTaggedEntry.tags); // [ "UNICEF", "children" ]
-// console.log(myTaggedEntry instanceof TaggedBlogEntry); // true
-// console.log(myTaggedEntry instanceof BlogEntry); // true
-// console.log(myTaggedEntry instanceof Object); // true
+const myTaggedEntry = new TaggedBlogEntry(
+  "A day in the life of a UNICEF Goodwill Ambassador",
+  "Nafi Thiam",
+  "United Nations",
+  "UNICEF"
+);
+console.log(myTaggedEntry.body); // A day in the life of a UNICEF Goodwill Ambassador
+myTaggedEntry.addTag("children");
+console.log(myTaggedEntry.tags); // [ "United Nations", "UNICEF", "children" ]
+console.log(myTaggedEntry.contains("life")); // true
+console.log(myTaggedEntry.contains("children")); // true
+myTaggedEntry.removeTag("United Nations");
+console.log(myTaggedEntry.tags); // [ "UNICEF", "children" ]
+console.log(myTaggedEntry instanceof TaggedBlogEntry); // true
+console.log(myTaggedEntry instanceof BlogEntry); // true
+console.log(myTaggedEntry instanceof Object); // true
 
-// console.log(Object.entries(myTaggedEntry));
-// console.log(Object.values(myTaggedEntry));
-// console.log(Object.keys(myTaggedEntry));
+console.log(Object.entries(myTaggedEntry));
+console.log(Object.values(myTaggedEntry));
+console.log(Object.keys(myTaggedEntry));
 
-// console.log(myTaggedEntry.toString());
+console.log(myTaggedEntry.toString());
 
 // ========================================================================
 // Gegeven onderstaande klasse Blog.
@@ -141,7 +142,7 @@ class TaggedBlogEntry extends BlogEntry {
 // ========================================================================
 
 class Blog {
-  static maxEntries = 3;
+  static maxEntries = 2;
   #entries = [];
   #creator;
 
@@ -154,7 +155,7 @@ class Blog {
   }
 
   set creator(value) {
-    this.#creator = value ? value : 'Anonymous';
+    this.#creator = value ? value : "Anonymous";
   }
 
   get nrOfEntries() {
@@ -214,44 +215,65 @@ class Blog {
 // ========================================================================
 
 class GroupBlog extends Blog {
-
   #authors = [];
 
-  constructor (creator, ...authors) {
+  constructor(creator, ...authors) {
     super(creator);
     this.#authors = authors;
+    this.addAuthor(creator);
+  }
+  get authors() {
+    return this.#authors.sort();
+  }
 
-  set addAuthor(author) {
+  addAuthor(author) {
+    for (const auth in this.authors) {
+      if (auth === author) return "user already exists";
+    }
+    this.authors.push(author);
+  }
 
+  removeAuthor(author) {
+    if (author === this.creator) return "cannot remove a creator";
+    const index = this.authors.indexOf(author);
+    if (index !== -1) {
+      this.tags.splice(index, 1);
+    }
+  }
+
+  addEntry(body, author, ...tags) {
+    if (this.authors.includes(author)) super.addEntry(body, author, ...tags);
+    else return;
   }
 }
 
 // Test je code:
 const ourGroupBlog = new GroupBlog(
-  'Nafi Thiam',
-  'Matthias Casse',
-  'Bashir Abdi'
+  "Nafi Thiam",
+  "Matthias Casse",
+  "Bashir Abdi"
 );
 ourGroupBlog.addEntry(
-  'Running for bronze in the 2020 Summer Olympics',
-  'Bashir Abdi'
+  "Running for bronze in the 2020 Summer Olympics",
+  "Bashir Abdi"
 );
 ourGroupBlog.addEntry(
-  'An entry by Nina who is not yet an author, it should not be added...',
-  'Nina Derwael'
+  "An entry by Nina who is not yet an author, it should not be added...",
+  "Nina Derwael"
 );
-ourGroupBlog.addAuthor('Nina Derwael');
+ourGroupBlog.addAuthor("Nina Derwael");
 ourGroupBlog.addEntry(
-  'An entry with tags by Nina who is a registered author...',
-  'Nina Derwael',
-  'gymnastics',
-  'olympics',
-  'gold',
-  'uneven bars'
+  "An entry with tags by Nina who is a registered author...",
+  "Nina Derwael",
+  "gymnastics",
+  "olympics",
+  "gold",
+  "uneven bars"
 );
 
 console.log(ourGroupBlog.nrOfEntries); // 2
 console.log(ourGroupBlog.toString());
+
 // == A blog created by Nafi Thiam. ==
 
 // On Sunday, 6 March 2022 Nina Derwael wrote:
