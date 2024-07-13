@@ -12,7 +12,13 @@ const dice2 = {
   },
 };
 
-export const craps = {
+export const initialiseerCraps =function() {
+  document.getElementById("play").onclick = craps.play;
+  craps.bet = prompt("What is your bet?");
+  alert("Press play to start the game");
+}
+
+const craps = {
   bet: 0,
   point: 0,
   earned: 0,
@@ -27,11 +33,10 @@ export const craps = {
   },
   play: function () {
     craps.rollDice();
-    alert(`You played ${craps.getSum()});
+    alert(`You played ${craps.getSum()}`);
 
-    if (craps.getSum() == 7 || craps.getSum() == 11 )
-        this.bet *= 2;
-    else
-
-  },
-};
+  }
+    // if (craps.getSum() == 7 || craps.getSum() == 11 )
+   // this.bet *= 2;
+    // else
+}
