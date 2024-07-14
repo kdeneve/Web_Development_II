@@ -13,7 +13,7 @@ const dice2 = {
 };
 
 export const initialiseerCraps =function() {
-  document.getElementById("play").onclick = craps.play;
+  document.getElementById("play").onclick = play;
   craps.bet = prompt("What is your bet?");
   alert("Press play to start the game");
 }
@@ -30,13 +30,15 @@ const craps = {
   },
   getSum: function () {
     return dice1.eyes + dice2.eyes;
-  },
-  play: function () {
-    craps.rollDice();
-    alert(`You played ${craps.getSum()}`);
+  }
+  
 
   }
     // if (craps.getSum() == 7 || craps.getSum() == 11 )
    // this.bet *= 2;
     // else
+
+const play = function () {
+  craps.rollDice();
+  alert(`You played ${craps.getSum()}`);
 }
