@@ -5,7 +5,22 @@ web pagina aangepast worden. Voorbeeld: de gebruiker rolt de dobbelsteen
 De AfrikaansDobbelenComponent gaat de methode rol aanspreken in de domeinklasse Dobbelsteen
 */
 
+import Dobbelsteen from "./Dobbelsteen.js"
+
 export default class AfrikaansDobbelen {
+  #dobbelsteen
+
+  constructor () {
+    this.#dobbelsteen = new Dobbelsteen();
+    //this.#dobbelsteen.rol();
+    this.#toHtml();
+  }
+
+
+  #toHtml() {
+    const ds = document.getElementById("1");
+    ds.src="./images/Dice" + this.#dobbelsteen.aantalOgen  +".png"
+  }
 
 }
 
