@@ -32,11 +32,10 @@ export default class AfrikaansDobbelenComponent {
       const ds = document.getElementById(t + 1);
       ds.src="./images/Dice" + this.#speler.dobbelstenen[t].aantalOgen  +".png"
     }
-  }
-      
 
-  play() {
-    this.#speler.speel();
+    document.getElementById("speler").innerHTML = `Speler = ${this.#speler.naam}`;
+    document.getElementById("score").innerHTML = `Score = ${this.#speler.score}`;
+   
   }
 
 }
