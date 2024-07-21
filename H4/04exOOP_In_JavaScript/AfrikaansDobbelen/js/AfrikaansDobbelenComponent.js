@@ -6,20 +6,23 @@ De AfrikaansDobbelenComponent gaat de methode rol aanspreken in de domeinklasse 
 */
 
 import Speler from "./Speler.js"
-import Dobbelsteen from "./Dobbelsteen.js"
+//import Dobbelsteen from "./Dobbelsteen.js"
+import Spel from "./Spel.js"
 
 export default class AfrikaansDobbelenComponent {
   //#dobbelsteen
-  #speler
+  #spel
 
   constructor () {
     //this.#dobbelsteen = new Dobbelsteen();
     //this.#dobbelsteen.rol();
-    this.#speler = new Speler("Kirikou");
+    //this.#speler = new Speler("Kirikou");
+    this.#spel = new Spel(this.#geefSpelers());
+
     //this.#speler.speel();
     document.getElementById("play").onclick = () => {
       //alert(this.#speler.naam);
-      this.#speler.speel();
+      this.#spel.speel();
       this.#toHtml();
       };
   }
@@ -37,6 +40,17 @@ export default class AfrikaansDobbelenComponent {
     document.getElementById("score").innerHTML = `Score = ${this.#speler.score}`;
    
   }
+
+   #geefSpelers() {
+    let aantal = prompt("Geef het aantal spelers in: ")
+    let players = [];
+    while (aantal > 0)
+    {
+      players.push(prompt("Geef de naam van de speler in"))
+      aantal--;
+    }
+    return players;
+   }
 
 }
 
