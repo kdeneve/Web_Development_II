@@ -33,11 +33,11 @@ export default class AfrikaansDobbelenComponent {
     for (let t = 0 ; t < Speler.aantalDobbelstenen ; t++) {
       //alert(t);
       const ds = document.getElementById(t + 1);
-      ds.src="./images/Dice" + this.#speler.dobbelstenen[t].aantalOgen  +".png"
+      ds.src="./images/Dice" + this.#spel.spelerAanZet.dobbelstenen[t].aantalOgen  +".png"
     }
 
-    document.getElementById("speler").innerHTML = `Speler = ${this.#speler.naam}`;
-    document.getElementById("score").innerHTML = `Score = ${this.#speler.score}`;
+    document.getElementById("speler").innerHTML = `Speler = ${this.#spel.spelerAanZet.naam}`;
+    document.getElementById("score").innerHTML = `Score = ${this.#spel.spelerAanZet.score}`;
    
   }
 
@@ -46,9 +46,11 @@ export default class AfrikaansDobbelenComponent {
     let players = [];
     while (aantal > 0)
     {
-      players.push(prompt("Geef de naam van de speler in"))
+      const spelersnaam = prompt("Geef de naam van de speler in");
+      players.push(spelersnaam);
       aantal--;
     }
+    console.log(players);
     return players;
    }
 
