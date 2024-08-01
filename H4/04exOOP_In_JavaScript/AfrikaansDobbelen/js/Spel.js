@@ -10,7 +10,7 @@ export default class Spel {
 
 
   constructor(spelersNamen) {
-    for (const name in spelersNamen)
+    for (const name of spelersNamen)
       this.#spelers.push(new Speler(name))
     
   }
@@ -23,8 +23,15 @@ export default class Spel {
   get scoreOverzicht() {}
 
   speel() {
+    // if (!this.heeftWinaar) {
+    //   for (let i = 0; i < this.aantalSpelers; i++) {
+    //       this.#spelerAanZet = this.#spelers[i];
+    //   }
+    //   adc.speel()
+    // }
+    this.#spelerAanZet = this.#spelers[0];
+    this.#spelerAanZet.speel();
 
-  
   }
 
   bepaalVolgendeSpeler() {
