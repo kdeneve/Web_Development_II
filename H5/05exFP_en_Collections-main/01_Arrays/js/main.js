@@ -73,7 +73,7 @@ console.log(aantalGeslaagden);
 const berekenAantalOvergangen = (plusMinString) =>
   plusMinString.split('').reduce((result, value, index, array) => {
     return result =
-      index < array.length - 1 && value !== array[index + 1]
+      (index < (array.length - 1) && value !== array[index + 1])
         ? result + 1
         : result;
   }, 0);
@@ -102,9 +102,16 @@ console.log(
 // die aangeeft of getal al dan niet narcistisch is
 // Maak gebruik van getal.split('') om een array met
 // de afzonderlijke cijfers van een getal te bekomen
-const isNarcistisch = undefined;
+const isNarcistisch = (getal) => {
+   const sum = getal.split('').reduce((result, value, index, array) => {
+       return result + parseInt(value) ** array.length;
+  },0);
+  return (sum === parseInt(getal));
+  
+}
 
 let getal = '548834';
+//console.log(isNarcistisch('1634'));
 console.log(`${getal} is ${isNarcistisch(getal) ? '' : 'niet '}narcistisch.`);
 getal = '1234';
 console.log(`${getal} is ${isNarcistisch(getal) ? '' : 'niet '}narcistisch.`);
@@ -113,7 +120,17 @@ console.log(`${getal} is ${isNarcistisch(getal) ? '' : 'niet '}narcistisch.`);
 // Schrijf een functie die controleert of een woord een permutatie is van
 // een ander woord (i.e. ze bevatten dezelfde letters), bijvoorbeeld:
 // voor SLAAPT en PLAATS retourneert de functie true
-const isPermutatie = undefined;
+const isPermutatie = (woord1, woord2) => {
+  const sum1 = woord1.split("").reduce((result, value) => {
+    return result + value.charCodeAt();
+  }, 0);
+
+  const sum2 = woord2.split("").reduce((result, value) => {
+    return result + value.charCodeAt();
+  }, 0);
+
+  return sum1 === sum2;
+};
 
 let woord1 = 'slaapt',
   woord2 = 'plaats';
@@ -122,7 +139,7 @@ console.log(
     isPermutatie(woord1, woord2) ? '' : 'g'
   }een permutatie van elkaar.`
 );
-woord2 = 'plast';
+woord2 = 'pleeeast';
 console.log(
   `${woord1} en ${woord2} zijn ${
     isPermutatie(woord1, woord2) ? '' : 'g'
@@ -154,6 +171,10 @@ const animals = [
   }
 ];
 
+animals.sort(({ weight: w1 }, { weight: w2 }) => {
+  return w1 - w2;
+});
+
 console.log(animals);
 
 // ============================================================================
@@ -164,5 +185,7 @@ let shapes = [
   [8, 'Octagon'],
   [4, 'Rectangle']
 ];
+
+shapes.sort(([a], [c]) => c - a);
 
 console.log(shapes);
