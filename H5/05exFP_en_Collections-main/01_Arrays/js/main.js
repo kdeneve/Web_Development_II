@@ -3,25 +3,31 @@
 // Creëer een nieuwe array die alle getallen uit origineel bevat
 // die groter zijn dan 3.
 const origineel = [1, 2, 3, 4];
-let groterDan3 = undefined;
+let groterDan3 = origineel.filter(n => n > 3);
+console.log(groterDan3);
 
 // Creëer een nieuwe array die alle even getallen uit origineel bevat
-let evenGetallen = undefined;
+let evenGetallen = origineel.filter(n => (n%2 == 0));
+console.log(evenGetallen);
 
 // Creëer een nieuwe array die alle getallen uit origineel bevat
 // maar met 5 verhoogd.
-let allesPlusVijf = undefined;
+let allesPlusVijf = origineel.map(n => n + 5);
 console.log(allesPlusVijf);
 
 // Creëer een nieuwe array waarbij de oneven getallen ongewijzigd blijven
 // en de even getallen vermenigvuldigd worden met 2.
-let onevenMaalTwee = undefined;
+let onevenMaalTwee = origineel.map(n => {
+  if (n%2 == 0)
+    return n * 2
+  else return n
+});
 console.log(onevenMaalTwee);
 
 // ============================================================================
 // Creëer een nieuwe array met alle fruit in hoofdletters.
 const fruit = ['orange', 'pineapple', 'strawberry', 'blueberry', 'melon'];
-const fruitCaps = undefined;
+const fruitCaps = fruit.map(f => f.toUpperCase());
 console.log(fruitCaps);
 
 // ============================================================================
@@ -32,7 +38,7 @@ const users = [
   { id: 3, firstname: 'Pieter', lastname: 'Martens', age: 29 }
 ];
 
-const averageAge = undefined;
+const averageAge = users.reduce((pv, el) => pv + el.age, 0) / users.length;
 console.log(`Average age of users = ${averageAge}`);
 
 // ============================================================================
@@ -41,25 +47,44 @@ console.log(`Average age of users = ${averageAge}`);
 // die enkel de getallen bevat die liggen tussen [start, stop]
 // De array van getallen, de start en stopwaarde zijn parameters van filterRange.
 // De oorspronkelijke array moet ongewijzigd blijven
-const filterRange = undefined;
+const filterRange = function(array, start, stop) {
+  return array.filter( el => (el > start && el < stop))
+  
+};
 
 console.log(filterRange([120, 5, -88, 26, 98, 100], 0, 100));
 
+let aantalGeslaagden = [10, 6, 11, 15].reduce( (pv, mark) => { return pv + (mark >= 10)}, 0)
+console.log(aantalGeslaagden);
 // ============================================================================
 // We werken we met strings die enkel de karakters
 // + en - bevatten.
 // Schrijf een functie berekenAantalOvergangen met een string parameter
 // die berekent hoeveel maal een overgang optreedt van + naar − of omgekeerd.
 // Je mag ervan uitgaan dat de invoerstring minstens 1 karakter bevat.
-const berekenAantalOvergangen = undefined;
+
+// Mijn poging
+// const berekenAantalOvergangen = function(word) {
+//   let signs = word.split('');
+  
+//   return signs.reduce((pv, cv, ci, signs) => { return pv + ( cv !== signs[ci+1]) } , 0)
+// };
+
+const berekenAantalOvergangen = (plusMinString) =>
+  plusMinString.split('').reduce((result, value, index, array) => {
+    return result =
+      index < array.length - 1 && value !== array[index + 1]
+        ? result + 1
+        : result;
+  }, 0);
 
 let plusMin = '-++++----++--+';
 console.log(
-  `Aantal overgangen in ${plusMin} = ${berekenAantalOvergangen(plusMin)}`
+ `Aantal overgangen in ${plusMin} = ${berekenAantalOvergangen(plusMin)}`
 );
 plusMin = '++';
 console.log(
-  `Aantal overgangen in ${plusMin} = ${berekenAantalOvergangen(plusMin)}`
+ `Aantal overgangen in ${plusMin} = ${berekenAantalOvergangen(plusMin)}`
 );
 
 // ============================================================================
