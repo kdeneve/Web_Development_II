@@ -69,7 +69,7 @@ console.table(fifteen);
 
 // Array.prototype.map()
 // 2. Give us an array of the inventor first and last names
-const fullNames = undefined;
+const fullNames = inventors.map((inventor) => inventor.first + " " + inventor.last)
 console.log(fullNames);
 
 // Array.prototype.sort()
@@ -81,16 +81,19 @@ console.log(fullNames);
 //     return -1;
 //   }
 // });
-const ordered = undefined;
+
+const ordered = inventors.sort((a, b) => a.year - b.year)
+
+
 console.table(ordered);
 
 // Array.prototype.reduce()
 // 4. How many years did all the inventors live?
-const totalYears = undefined;
+const totalYears = inventors.reduce((pv, inventor) => pv + inventor.passed - inventor.year, 0);
 console.log(totalYears);
 
 // 5. Sort the inventors by years lived
-const oldest = undefined;
+const oldest = inventors.sort((a, b) => (b.passed - b.year) - (a.passed - a.year));
 console.table(oldest);
 
 // 6. Sort Exercise
