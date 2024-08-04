@@ -106,9 +106,9 @@ console.table(oldest);
 const alpha = people.sort((lastOne, nextOne) => {
   const [aLast, aFirst] = lastOne.split(", ");
   const [bLast, bFirst] = nextOne.split(", ");
-  return aLast > bLast ? 1 : -1;
+  return aLast - bLast;
 });
-console.log(alpha);
+console.table(alpha);
 
 // 7. Reduce Exercise
 // Sum up the instances of each of these. In other words, how many times does `car`,`truck`, etc. exist in the array?
