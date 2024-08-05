@@ -110,6 +110,34 @@ const alpha = people.sort((lastOne, nextOne) => {
 });
 console.table(alpha);
 
+const users = [
+  {
+    id: 1,
+    firstname: "Jan",
+    lastname: "Janssens",
+  },
+  {
+    id: 2,
+    firstname: "Eva",
+    lastname: "De Smet",
+  },
+  {
+    id: 3,
+    firstname: "Pieter",
+    lastname: "Martens",
+  },
+  { id: 4, firstname: "Bom", lastname: "Jones" },
+];
+
+const result = users.sort(({ firstname: f1 }, { firstname: f2 }) => {
+  let p1Name = f1.toUpperCase();
+  let p2Name = f2.toUpperCase();
+  return p1Name < p2Name ? -1 : p1Name > p2Name ? 1 : 0;
+  // return p1Name - p2Name ///// Dit werkt niet want het geeft een 'undefined' terug als resultaat !!!!
+});
+
+console.table(result);
+
 // 7. Reduce Exercise
 // Sum up the instances of each of these. In other words, how many times does `car`,`truck`, etc. exist in the array?
 // The result should be the following:
