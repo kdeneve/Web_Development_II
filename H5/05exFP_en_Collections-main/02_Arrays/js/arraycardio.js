@@ -106,7 +106,7 @@ console.table(oldest);
 const alpha = people.sort((lastOne, nextOne) => {
   const [aLast, aFirst] = lastOne.split(", ");
   const [bLast, bFirst] = nextOne.split(", ");
-  return bLast - aLast;
+  return aLast > bLast ? 1 : -1;
 });
 console.table(alpha);
 
