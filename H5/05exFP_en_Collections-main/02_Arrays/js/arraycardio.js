@@ -168,7 +168,15 @@ const data = [
   "truck",
   "pogostick",
 ];
-const transportation = undefined;
+
+const transportation = data.reduce((obj, item) => {
+  if (!obj[item]) {
+    obj[item] = 0;
+  }
+  obj[item]++;
+  return obj;
+}, {});
+
 console.log(transportation);
 
 const family = [
@@ -194,20 +202,33 @@ const comments = [
 //     return true;
 //   }
 // });
-const isAdult = undefined;
+const isAdult = family.some(function (person) {
+  const currentYear = new Date().getFullYear();
+  if (currentYear - person.year >= 19) {
+    return true;
+  }
+});
+
 console.log({ isAdult });
 // Array.prototype.every() // is everyone 19?
-const allAdults = undefined;
+const allAdults = family.every(function (person) {
+  const currentYear = new Date().getFullYear();
+  if (currentYear - person.year >= 19) {
+    return true;
+  }
+});
 console.log({ allAdults });
 
 //9. Array.prototype.find()
 // Find is like filter, but instead returns just the one you are looking for
 // find the comment with the ID of 823423
-const comment = undefined;
+const comment = comments.find((c) => c.id === 823423);
 console.log(comment);
 
 //10.  Array.prototype.findIndex()
 // Find the comment with this ID
 // delete the comment with the ID of 823423
-const index = undefined;
+const index = comments.findIndex((c) => c.id === 823423);
+comments.splice(index, 1);
 console.log(index);
+console.log(comments);
