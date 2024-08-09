@@ -213,9 +213,7 @@ console.log({ isAdult });
 // Array.prototype.every() // is everyone 19?
 const allAdults = family.every(function (person) {
   const currentYear = new Date().getFullYear();
-  if (currentYear - person.year >= 19) {
-    return true;
-  }
+  if (currentYear - person.year >= 19) return true;
 });
 console.log({ allAdults });
 
